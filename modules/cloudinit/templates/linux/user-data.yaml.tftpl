@@ -48,6 +48,10 @@ packages:
 %{ if hostname == "SansibleSVR03" ~}
   - ansible
   - python3-pip
+  - python3-devel
+  - python3-paramiko
+  - gcc
+  - libssh-devel
 %{ endif ~}
 
 
@@ -63,7 +67,7 @@ runcmd:
 %{ if hostname == "SansibleSVR03" ~}
   - [ git, clone, https://github.com/donato-marcos/TCC_ansible.git, /home/ansible/ansible]
   - [ chown, -R, ansible:ansible, /home/ansible/ansible ]
-  - [ pip, install, pywinrm]
+  - [ pip, install, pywinrm, ansible-pylibssh ]
   - [ sudo, -u, ansible, ssh-keygen, -t, rsa, -b, 2048, -f, /home/ansible/.ssh/ansible_key, -N, "" ]
 %{ endif ~}
 
