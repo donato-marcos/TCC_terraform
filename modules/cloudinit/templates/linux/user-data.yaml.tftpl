@@ -60,7 +60,7 @@ runcmd:
   - [ timedatectl, set-timezone, America/Sao_Paulo ]
   - |
     #!/bin/bash
-    if [-f /etc/redhat-release ]; then
+    if [ -f /etc/redhat-release ]; then
       localectl set-locale LANG=en_US.UTF-8
       localectl set-keymap br-abnt2
     fi
@@ -68,6 +68,23 @@ runcmd:
   - [ git, clone, https://github.com/donato-marcos/TCC_ansible.git, /home/ansible/ansible]
   - [ chown, -R, ansible:ansible, /home/ansible/ansible ]
   - [ pip, install, pywinrm, ansible-pylibssh ]
-  - [ sudo, -u, ansible, ssh-keygen, -t, rsa, -b, 2048, -f, /home/ansible/.ssh/ansible_key, -N, "" ]
+  - [ sudo, -u, ansible, ssh-keygen, -t, rsa, -b, "2048", -f, /home/ansible/.ssh/ansible_key, -N, "" ]
+  - |
+    cat << 'EOF' > /home/ansible/.tmux.conf
+    set -g prefix ^B
+    set -g renumber-windows on
+    set -g base-index 1
+    set-option -g mouse on
+    set-option -g status-position top
+
+    # Atalhos para sincronizar painéis (on/off)
+    bind-key -n M-s setw synchronize-panes on
+    bind-key -n M-f setw synchronize-panes off
+
+    # Mostrar status quando sincronização está ativa
+    set -g window-status-activity-style bg=red
+    set -g window-status-current-format "#{?pane_synchronized,[SYNC] ,}#I:#W"
+    EOF
+  - [ chown, ansible:ansible, /home/ansible/.tmux.conf ]
 %{ endif ~}
 
