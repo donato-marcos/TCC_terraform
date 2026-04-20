@@ -182,7 +182,7 @@ vms = {
         ipv4_address = "10.20.100.20"
         ipv4_prefix  = 24
         ipv4_gateway = "10.20.100.254"
-        dns_servers  = ["8.8.8.8"]
+        dns_servers  = ["8.8.8.8","10.20.100.10"]
       }
     ]
   },

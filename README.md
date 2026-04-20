@@ -5,11 +5,11 @@
 > **FATEC Osasco** | **Autor:** Marcos Donato  
 > **Ano:** 2026
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Terraform](https://img.shields.io/badge/Terraform-1.14+-purple.svg)](https://www.terraform.io/)
-[![Libvirt Provider](https://img.shields.io/badge/Libvirt-0.9.1-orange.svg)](https://registry.terraform.io/providers/dmacvicar/libvirt/latest)
+[![Provider](https://img.shields.io/badge/Provider-0.9.1-orange.svg)](https://registry.terraform.io/providers/dmacvicar/libvirt/latest)
 
-## Sobre
+## Sobre o Projeto
 
 Repositório com a infraestrutura como código (IaC) para provisionar o ambiente de laboratório utilizado no TCC.  
 Cria máquinas virtuais **Linux (Ubuntu/Rocky), Windows Server e VyOS** com redes IPv4/IPv6, Cloud-init e módulos reutilizáveis via Terraform + Libvirt/KVM.

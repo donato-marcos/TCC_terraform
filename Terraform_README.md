@@ -149,6 +149,7 @@ Veja:
 - [`modules/domain_linux/README.md`](modules/domain_linux/README.md)
 - [`modules/domain_windows/README.md`](modules/domain_windows/README.md)
 - [`modules/orchestration/README.md`](modules/orchestration/README.md)
+- [`environments/lab/README.md`](environments/lab/README.md)
 
 ## 🧪 Casos de uso típicos
 
