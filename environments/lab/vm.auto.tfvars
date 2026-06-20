@@ -2,7 +2,7 @@ vms = {
   # Firewall (VyOS)
   "Nfirewall03" = {
     os_type        = "vyos"
-    vcpus          = 2
+    vcpus          = 1
     current_memory = 1024
     memory         = 1024
     firmware       = "bios"
@@ -23,8 +23,11 @@ vms = {
     ]
     networks = [
       {
-        name           = "wan-net"
-        wait_for_lease = true
+        name           = "bridge0"
+        ipv4_address   = "192.168.0.20"
+        ipv4_prefix    = 24
+        ipv4_gateway   = "192.168.0.1"
+        wait_for_lease = false
       },
       {
         name           = "uplink-net"
@@ -38,7 +41,7 @@ vms = {
   # Roteador (VyOS)
   "Ncore03" = {
     os_type        = "vyos"
-    vcpus          = 2
+    vcpus          = 1
     current_memory = 1024
     memory         = 1024
     firmware       = "bios"
@@ -100,7 +103,7 @@ vms = {
     memory         = 2048
     firmware       = "efi"
     video_model    = "virtio"
-    graphics       = "vnc"
+    graphics       = "spice"
     running        = true
     disks = [
       {
@@ -109,7 +112,7 @@ vms = {
         bootable = true
 
         backing_store = {
-          image  = "ubuntu-24-cloud.x86_64.qcow2"
+          image  = "ubuntu-26-cloud.x86_64.qcow2"
           format = "qcow2"
         }
       }
@@ -133,7 +136,7 @@ vms = {
     memory         = 2048
     firmware       = "efi"
     video_model    = "virtio"
-    graphics       = "vnc"
+    graphics       = "spice"
     running        = true
     disks = [
       {
@@ -153,7 +156,7 @@ vms = {
         ipv4_address = "10.20.200.20"
         ipv4_prefix  = 24
         ipv4_gateway = "10.20.200.254"
-        dns_servers  = ["10.20.200.10"]
+        dns_servers  = ["8.8.8.8"]
       }
     ]
   },
@@ -162,11 +165,11 @@ vms = {
   "SansibleSVR03" = {
     os_type        = "linux"
     vcpus          = 2
-    current_memory = 1024
+    current_memory = 2048
     memory         = 2048
     firmware       = "efi"
     video_model    = "virtio"
-    graphics       = "vnc"
+    graphics       = "spice"
     running        = true
     disks = [
       {
@@ -175,7 +178,7 @@ vms = {
         bootable = true
 
         backing_store = {
-          image  = "Fedora-Cloud-Base-Generic-43-1.6.x86_64.qcow2"
+          image  = "Fedora-Cloud-Base-Generic-44-1.7.x86_64.qcow2"
           format = "qcow2"
         }
       }
@@ -186,7 +189,7 @@ vms = {
         ipv4_address = "10.20.100.20"
         ipv4_prefix  = 24
         ipv4_gateway = "10.20.100.254"
-        dns_servers  = ["8.8.8.8", "10.20.100.10"]
+        dns_servers  = ["10.20.100.10", "8.8.8.8"]
       }
     ]
   },
@@ -195,12 +198,12 @@ vms = {
   "SdcSVR03" = {
     os_type        = "windows"
     vcpus          = 4
-    current_memory = 3584
-    memory         = 4096
+    current_memory = 6144
+    memory         = 6144
     firmware       = "efi"
     video_model    = "qxl"
-    graphics       = "vnc"
-    running        = true
+    graphics       = "spice"
+    running        = false
     disks = [
       {
         name     = "os"
@@ -223,64 +226,64 @@ vms = {
       }
     ]
   },
-#
-#  # Estação de trabalho Linux (TI)
-#  "ClinuxTI03" = {
-#    os_type        = "linux"
-#    vcpus          = 2
-#    current_memory = 1024
-#    memory         = 2048
-#    firmware       = "efi"
-#    video_model    = "virtio"
-#    graphics       = "vnc"
-#    running        = true
-#    disks = [
-#      {
-#        name     = "os"
-#        size_gb  = 60
-#        bootable = true
-#  
-#        backing_store = {
-#          image  = "fedoraKDE-custom-image.qcow2"
-#          format = "qcow2"
-#        }
-#      }
-#    ]
-#    networks = [
-#      {
-#        name           = "clientes_ti-net"
-#        wait_for_lease = true
-#      }
-#    ]
-#  },
-#
-#  # Estação de trabalho Windows (FIN)
-#  "CwinFIN03" = {
-#    os_type        = "windows"
-#    vcpus          = 4
-#    current_memory = 3584
-#    memory         = 4096
-#    firmware       = "efi"
-#    video_model    = "qxl"
-#    graphics       = "vnc"
-#    running        = true
-#    disks = [
-#      {
-#        name     = "os"
-#        size_gb  = 60
-#        bootable = true
-#  
-#        backing_store = {
-#          image  = "win10-custom.qcow2"
-#          format = "qcow2"
-#        }
-#      }
-#    ]
-#    networks = [
-#      {
-#        name           = "clientes_fin-net"
-#        wait_for_lease = true
-#      }
-#    ]
-#  }
+
+  # Estação de trabalho Linux (TI)
+  "ClinuxTI03" = {
+    os_type        = "linux"
+    vcpus          = 2
+    current_memory = 3584
+    memory         = 4096
+    firmware       = "efi"
+    video_model    = "virtio"
+    graphics       = "spice"
+    running        = false
+    disks = [
+      {
+        name     = "os"
+        size_gb  = 60
+        bootable = true
+
+        backing_store = {
+          image  = "fedoraKDE-custom-image.qcow2"
+          format = "qcow2"
+        }
+      }
+    ]
+    networks = [
+      {
+        name           = "clientes_ti-net"
+        wait_for_lease = false
+      }
+    ]
+  },
+
+  # Estação de trabalho Windows (FIN)
+  "CwinFIN03" = {
+    os_type        = "windows"
+    vcpus          = 4
+    current_memory = 3584
+    memory         = 4096
+    firmware       = "efi"
+    video_model    = "qxl"
+    graphics       = "spice"
+    running        = false
+    disks = [
+      {
+        name     = "os"
+        size_gb  = 60
+        bootable = true
+  
+        backing_store = {
+          image  = "win10-custom-image.qcow2"
+          format = "qcow2"
+        }
+      }
+    ]
+    networks = [
+      {
+        name           = "clientes_fin-net"
+        wait_for_lease = false
+      }
+    ]
+  }
 }

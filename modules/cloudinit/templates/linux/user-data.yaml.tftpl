@@ -3,7 +3,7 @@
 ssh_pwauth: true
 
 hostname: ${lower(hostname)}
-fqdn: ${lower(hostname)}.teste.local
+fqdn: ${lower(hostname)}.fatec.lab
 
 manage_etc_hosts: true
 
@@ -40,12 +40,16 @@ packages:
   - curl
   - wget
   - net-tools
+  - bind-utils
   - git
   - tmux
   - qemu-guest-agent
   - bash-completion
   - python3
   - tree
+%{ if hostname == "SwebDMZ03" ~}
+  - firewalld
+%{ endif ~}
 %{ if hostname == "SansibleSVR03" ~}
   - ansible
   - python3-pip

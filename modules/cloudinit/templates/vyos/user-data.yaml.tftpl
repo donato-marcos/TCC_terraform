@@ -43,12 +43,21 @@ vyos_config_commands:
 %{ endif ~}
 %{ endfor ~}
 
-%{ if hostname == "Nfirewall03" ~}
+%{ if hostname == "Ncore03" ~}
   # --- Configuração de Firewall/NAT ---
   
-  # Habilitar forwarding IP
-  - set system ip forwarding
+  # DHCP Relay
+  - set service dhcp-relay listen-interface 'eth3'
+  - set service dhcp-relay listen-interface 'eth4'
+  - set service dhcp-relay relay-options relay-agents-packets 'discard'
+  - set service dhcp-relay server '10.20.100.10'
+  - set service dhcp-relay upstream-interface 'eth2'
   
+%{ endif ~}
+
+%{ if hostname == "Nfirewall03" ~}
+  # --- Configuração de Firewall/NAT ---
+ 
   # Configurar NAT (masquerade) para todas as redes internas
   - set nat source rule 10 outbound-interface name 'eth0'
   - set nat source rule 10 translation address 'masquerade'
